@@ -8,6 +8,3 @@ persian_label = {
     4: "عصبانیت",
     5: "ترکیبی"
 }
-
-train_set, test_set = DataPrep("dataset").data_process()
-# print(train_set.shape)
