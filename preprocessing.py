@@ -16,7 +16,7 @@ class DataPrep:
         }
         self.data_path = directory_path
 
-    def read_csv_dataset(self):
+    def data_process(self):
         csv_files = [f for f in os.listdir(self.data_path) if f.endswith('.csv')]
         dataframes = {}
 
@@ -34,16 +34,6 @@ class DataPrep:
         # تمام دیتا ها را ترکیب و شافل می‌کنیم
         merged_df = pd.concat(dataframes, ignore_index=True)
         shuffled_df = merged_df.sample(frac=1, random_state=42).reset_index(drop=True)
-        return shuffled_df
 
-
-dataframes = DataPrep("dataset").read_csv_dataset()
-# print(dataframes.head())
-
-# تقسیم داده ها با نسبت ۸۰ به ۲۰
-train_data, test_data = train_test_split(dataframes, test_size=0.2, random_state=42)
-
-# print("Train Set:")
-# print(train_data.head())
-# print("\nTest Set:")
-# print(test_data.head())
+        # تقسیم داده ها با نسبت ۸۰ به ۲۰
+        return train_test_split(shuffled_df, test_size=0.2, random_state=42)
