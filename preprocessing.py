@@ -1,6 +1,16 @@
 import os
 import pandas as pd
 
+# نوع عواطف را دسته بندی می‌کنیم
+categories = {
+    "sad": 0,
+    "fear": 1,
+    "surprise": 2,
+    "disgust": 3,
+    "anger": 4,
+    "joy": 5
+}
+
 def read_csv_dataset(directory_path):
     csv_files = [f for f in os.listdir(directory_path) if f.endswith('.csv')]
     dataframes = {}
@@ -12,17 +22,15 @@ def read_csv_dataset(directory_path):
         # فقط توییت و عواطف آن ذخیره شود
         if 'tweet' in df.columns and 'emotion' in df.columns:
             df = df[['tweet', 'emotion']]
+            df['emotion'] = df['emotion'].map(categories)
 
         dataframes[file] = df
     
     # تمام دیتا ها را ترکیب و شافل می‌کنیم
     merged_df = pd.concat(dataframes, ignore_index=True)
-    shuffled_df = merged_df.sample(frac=1, random_state=20).reset_index(drop=True)
+    shuffled_df = merged_df.sample(frac=1, random_state=42).reset_index(drop=True)
     return shuffled_df
 
 
 # dataframes = read_csv_dataset("dataset")
-
-# for filename, df in dataframes.items():
-#     print(f"\n--- {filename} ---")
-#     print(df.head())
+# print(dataframes.head())
