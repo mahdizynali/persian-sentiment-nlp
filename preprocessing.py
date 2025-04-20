@@ -60,20 +60,3 @@ class DataPrep:
                     freqs[pair] = 1
 
         return freqs
-
-
-
-
-
-# Initialize the DataPrep object
-data_prep = DataPrep(directory_path="dataset")
-
-# Process the data and split into train/test
-X_train, X_test, y_train, y_test = data_prep.data_process()
-
-# Build the frequency dictionary for the training data
-freqs = data_prep.build_freqs(X_train, y_train)
-
-# Display the first few (word, sentiment) frequency pairs
-for key, value in list(freqs.items())[:10]:
-    print(f"Word-Sentiment Pair: {key}, Frequency: {value}")
