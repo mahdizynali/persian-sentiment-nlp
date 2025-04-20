@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+from sklearn.model_selection import train_test_split
 
 # نوع عواطف را دسته بندی می‌کنیم
 categories = {
@@ -32,5 +33,13 @@ def read_csv_dataset(directory_path):
     return shuffled_df
 
 
-# dataframes = read_csv_dataset("dataset")
+dataframes = read_csv_dataset("dataset")
 # print(dataframes.head())
+
+# تقسیم داده ها با نسبت ۸۰ به ۲۰
+train_data, test_data = train_test_split(dataframes, test_size=0.2, random_state=42)
+
+# print("Train Set:")
+# print(train_data.head())
+# print("\nTest Set:")
+# print(test_data.head())
