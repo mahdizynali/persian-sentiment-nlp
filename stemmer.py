@@ -25,10 +25,3 @@ class PersianStemmer:
                 break
 
         return word
-
-# prefix_file = "manipulate/stem_prefixes.txt"
-# suffix_file = "manipulate/stem_suffixes.txt"
-# stemmer = PersianStemmer(prefix_file, suffix_file)
-# words = ["می‌نویسم", "کتاب‌ها", "بهترین", "دوستانم", "نمی‌دانند"]
-# for word in words:
-#     print(f"ریشه {word} = {stemmer.stem(word)}")
