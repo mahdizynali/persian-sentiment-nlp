@@ -3,6 +3,7 @@ import re
 import string
 import numpy as np
 import pandas as pd
+from tqdm import tqdm
 from sklearn.model_selection import train_test_split
 
 DATASET_PATH = "dataset"
@@ -32,4 +33,5 @@ Persian_categories = {
 
 LEARNING_RATE=0.01
 CLASSES=6 # تعداد عواطف بر اساس دیتاست
-ITRATION=1000
+ITRATION=1
+BATCH_SIZE = 32
