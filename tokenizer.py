@@ -3,27 +3,57 @@ import string
 from stemmer import PersianStemmer
 
 class MaZe_tokenizer:
+    '''کلاس توکنایزر برای حذف حروف اضافه و توکن بندی لغات'''
     def __init__(self):
-        self.stem = PersianStemmer(prefix_file="manipulate/stem_prefixes.txt", suffix_file="manipulate/stem_suffixes.txt")
+        self.stemmer = PersianStemmer(
+            prefix_file="manipulate/stem_prefixes.txt", 
+            suffix_file="manipulate/stem_suffixes.txt"
+        )
+
+        with open("manipulate/stopwords.txt", encoding='utf-8') as f:
+            self.stopwords = [line.strip() for line in f if line.strip()]
+        with open("manipulate/punctuations.txt", encoding='utf-8') as f:
+            self.punctuations = [line.strip() for line in f if line.strip()]
+        with open("manipulate/numbers.txt", encoding='utf-8') as f:
+            self.numbers = [line.strip() for line in f if line.strip()]
+
 
     def remove_extras(self, text):
-        text = re.sub(r'\$\w*', '', text)
-        text = re.sub(r'^RT[\s]+', '', text)
-        text = re.sub(r'https?:\/\/.*[\r\n]*', '', text)
-        text = re.sub(r'@\w+', '', text)
-        text = re.sub(r'#', '', text)
-        text = re.sub(r'\s+', ' ', text).strip() # حذف اسپیس های اضافی
+        '''حذف موارد اضافی مثل لینک، منشن، هشتگ و غیره'''
+        text = re.sub(r'\$\w*', '', text)  # حذف نمادهای بورسی
+        text = re.sub(r'^RT[\s]+', '', text)  # حذف متن RT
+        text = re.sub(r'https?:\/\/.*[\r\n]*', '', text)  # حذف لینک‌ها
+        text = re.sub(r'@\w+', '', text)  # حذف منشن‌ها
+        text = re.sub(r'#', '', text)  # حذف علامت #
+        text = re.sub(r'\s+', ' ', text).strip()  # حذف فاصله‌های اضافی
         return text
 
+
     def do_tokenize(self, text):
-        text = self.preprocess(text)
+        '''توکن بندی متن با حذف موارد اضافی، استمر و فیلتر'''
+        text = self.remove_extras(text)
         text_tokens = text.split()
         tokens_clean = []
-        for word in text_tokens:
-            word = word.lower()
-            if word not in self.stopwords and word not in string.punctuation:
-                if self.stemmer:
-                    word = self.stemmer.stem(word)
-                tokens_clean.append(word)
 
+        for word in text_tokens:
+            
+            # word = word.strip().lower()
+
+            if word in self.stopwords:
+                continue
+            if word in self.punctuations:
+                continue
+            if word in self.numbers:
+                continue
+            if word in string.punctuation:
+                continue
+
+            if self.stemmer:
+                word = self.stemmer.stem(word)
+
+            tokens_clean.append(word)
+
+        # with open("tokens.txt", "+a") as tk:
+        #     tk.write(str(text_tokens) + "\n")
+        #     tk.close()
         return tokens_clean
