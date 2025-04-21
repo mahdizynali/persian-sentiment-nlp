@@ -1,6 +1,4 @@
 import os
-import re
-import string
 import numpy as np
 import pandas as pd
 from tokenizer import MaZe_tokenizer
@@ -19,7 +17,7 @@ class DataPrep:
             "joy": 5
         }
         self.data_path = directory_path
-        self.tokenize = MaZe_tokenizer()
+        self.toke = MaZe_tokenizer()
 
     def data_process(self):
         csv_files = [f for f in os.listdir(self.data_path) if f.endswith('.csv')]
@@ -52,11 +50,13 @@ class DataPrep:
         freqs = {}
 
         for y, txt in zip(label, text):
-            for word in self.tokenize(txt):
+            for word in self.toke.do_tokenize(txt):
                 pair = (word, y)
                 if pair in freqs:
                     freqs[pair] += 1
                 else:
                     freqs[pair] = 1
-
+        # with open("freqs.txt", "+a") as tk:
+        #     tk.write(str(freqs) + "\n")
+        #     tk.close()
         return freqs
