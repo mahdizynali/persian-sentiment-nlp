@@ -1,21 +1,11 @@
-import os
-import numpy as np
-import pandas as pd
 from tokenizer import MaZe_tokenizer
-from sklearn.model_selection import train_test_split
+from config import *
 
 class DataPrep:
     '''کلاس آماده سازی اولیه داده ها برای آموزش'''
     def __init__(self, directory_path) -> None:
         # نوع عواطف را دسته بندی می‌کنیم
-        self.categories = {
-            "sad": 0,
-            "fear": 1,
-            "surprise": 2,
-            "disgust": 3,
-            "anger": 4,
-            "joy": 5
-        }
+        self.categories = English_categories
         self.data_path = directory_path
         self.toke = MaZe_tokenizer()
 

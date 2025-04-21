@@ -1,20 +1,16 @@
-import re
-import string
+from config import *
 from stemmer import PersianStemmer
 
 class MaZe_tokenizer:
     '''کلاس توکنایزر برای حذف حروف اضافه و توکن بندی لغات'''
     def __init__(self):
-        self.stemmer = PersianStemmer(
-            prefix_file="manipulate/stem_prefixes.txt", 
-            suffix_file="manipulate/stem_suffixes.txt"
-        )
+        self.stemmer = PersianStemmer()
 
-        with open("manipulate/stopwords.txt", encoding='utf-8') as f:
+        with open(STOPWORDS_PATH, encoding='utf-8') as f:
             self.stopwords = [line.strip() for line in f if line.strip()]
-        with open("manipulate/punctuations.txt", encoding='utf-8') as f:
+        with open(PUNCTUATIONS_PATH, encoding='utf-8') as f:
             self.punctuations = [line.strip() for line in f if line.strip()]
-        with open("manipulate/numbers.txt", encoding='utf-8') as f:
+        with open(NUMBERS_PATH, encoding='utf-8') as f:
             self.numbers = [line.strip() for line in f if line.strip()]
 
 

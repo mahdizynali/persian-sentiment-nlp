@@ -1,7 +1,9 @@
+from config import *
+
 class PersianStemmer:
     '''از این کلاس به منظور ریشه یابی کلمات استفاده می‌کنیم'''
-    def __init__(self, prefix_file, suffix_file):
-        self.prefixes, self.suffixes = self.load_affixes(prefix_file, suffix_file)
+    def __init__(self):
+        self.prefixes, self.suffixes = self.load_affixes(STEMMER_PREFIX_PATH, STEMMER_SUFFIX_PATH)
 
     def load_affixes(self, prefix_path, suffix_path):
         with open(prefix_path, encoding='utf-8') as f:
