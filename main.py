@@ -1,22 +1,25 @@
+from config import *
+from tokenizer import MaZe_tokenizer
 from preprocessing import DataPrep
-
-persian_label = {
-    0: "ناراحت",
-    1: "ترس",
-    2: "شگفت زده",
-    3: "منزجر",
-    4: "عصبانیت",
-    5: "ترکیبی"
-}
+from trainer import Numpy_Trainer
 
 
-data_prep = DataPrep(directory_path="dataset")
-
+data_prep = DataPrep(DATASET_PATH)
 X_train, X_test, y_train, y_test = data_prep.data_process()
-
+tokenizer = MaZe_tokenizer()
 freqs = data_prep.freqs(X_train, y_train)
-# print(freqs)
 
 
-# for key, value in list(freqs.items())[:10]:
-#     print(f"Word-Sentiment Pair: {key}, Frequency: {value}")
+trainer = Numpy_Trainer(freqs)
+trainer.train(X_train, y_train, tokenizer)
+
+
+
+# correct = 0
+# for tweet, label in zip(X_test, y_test):
+#     pred = trainer.predict(tweet, tokenizer)
+#     if pred == label:
+#         correct += 1
+
+# accuracy = correct / len(y_test)
+# print(f"Test Accuracy: {accuracy:.2f}")
