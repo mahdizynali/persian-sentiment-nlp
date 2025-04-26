@@ -34,4 +34,3 @@ Persian_categories = {
 LEARNING_RATE=0.01
 CLASSES=6 # تعداد عواطف بر اساس دیتاست
 ITRATION=1
-BATCH_SIZE = 32
