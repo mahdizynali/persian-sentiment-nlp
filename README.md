@@ -25,7 +25,7 @@ persian-sentiment-nlp/ │
 ```bash
 pip install numpy pandas tqdm scikit-learn
 ```
-من از نمونه دیتاست توییت های فارسی از آدرس کگل زیر استفاده کردم که درون پوشه دیتاست پروژه هم موجوده که لیست داده های موجود بدین شرحه:
+من از نمونه دیتاست توییت های فارسی در قالب csv ، از آدرس کگل زیر استفاده کردم که لیست کلاس داده های موجود بدین شرحه:
 ```
 https://www.kaggle.com/datasets/behdadkarimi/persian-tweets-emotional-dataset
 ```
