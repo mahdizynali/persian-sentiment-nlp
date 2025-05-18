@@ -15,22 +15,22 @@ STEMMER_PREFIX_PATH = "manipulate/stem_prefixes.txt"
 
 English_categories = {
     "sad": 0,
-    "fear": 1,
-    "surprise": 2,
-    "disgust": 3,
-    "anger": 4,
-    "joy": 5
+    # "fear": 1,
+    # "surprise": 2,
+    # "disgust": 3,
+    # "anger": 4,
+    "joy": 1
 }
 
 Persian_categories = {
     0: "ناراحت",
-    1: "ترس",
-    2: "شگفت زده",
-    3: "منزجر",
-    4: "عصبانیت",
-    5: "ترکیبی"
+    # 1: "ترس",
+    # 2: "شگفت زده",
+    # 3: "منزجر",
+    # 4: "عصبانیت",
+    1: "ترکیبی"
 }
 
 LEARNING_RATE=0.01
-CLASSES=6 # تعداد عواطف بر اساس دیتاست
+CLASSES=2 # تعداد عواطف بر اساس دیتاست
 ITRATION=1

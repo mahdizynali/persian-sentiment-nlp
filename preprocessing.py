@@ -10,10 +10,11 @@ class DataPrep:
         self.toke = MaZe_tokenizer()
 
     def data_process(self):
-        csv_files = [f for f in os.listdir(self.data_path) if f.endswith('.csv')]
+        # csv_files = [f for f in os.listdir(self.data_path) if f.endswith('.csv')]
+        csv_files = ["/home/maximum/nlp-dataset/sad.csv","/home/maximum/nlp-dataset/joy.csv"]
         dataframes = {}
 
-        for file in csv_files:
+        for file in tqdm(csv_files, desc="Loading csv files"):
             full_path = os.path.join(self.data_path, file)
             df = pd.read_csv(full_path)
 
@@ -35,18 +36,15 @@ class DataPrep:
         return train_test_split(data, labels, test_size=0.2, random_state=42)
 
     def freqs(self, text, y):
-        """ساخت یک مپینگ از(کلمه, عواطف)"""
+        """ساخت یک مپینگ از (کلمه, عواطف)"""
         label = np.squeeze(y).tolist()
         freqs = {}
 
-        for y, txt in zip(label, text):
+        for y_val, txt in tqdm(zip(label, text), total=len(label), desc="Building freqs"):
             for word in self.toke.do_tokenize(txt):
-                pair = (word, y)
+                pair = (word, y_val)
                 if pair in freqs:
                     freqs[pair] += 1
                 else:
                     freqs[pair] = 1
-        # with open("freqs.txt", "+a") as tk:
-        #     tk.write(str(freqs) + "\n")
-        #     tk.close()
         return freqs
