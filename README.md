@@ -58,3 +58,6 @@ python3 main.py
 ۵ - پیش‌بینی احساسات به صورت real-time
 
 ۶ - قابل توسعه برای استفاده از مدل‌های پیشرفته‌تر (LSTM, BERT و...)
+---
+اگر قصد دارید صرفا به صورت باینری مدل تشخیص عواطف داشته باشید، توصیه میکنم از برنج Naive-Bayes موجود در همین ریپو استفاده کنید که فرایند آموزش را به صورت آماری و با دقت و سرعت بهبود یافته انجام می‌هد. \
+![alt text](https://raw.githubusercontent.com/mahdizynali/persian-sentiment-nlp/refs/heads/main/naive.jpg)
