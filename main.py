@@ -23,7 +23,6 @@ while True:
 
         score = naive_bayes_predict(txt, logprior, loglikelihood)
 
-        # Display raw score and optional label
         print(f"Log-probability score: {score:.4f}")
         sentiment = "مثبت" if score > 0 else "منفی"
         print(f"پیش‌بینی احساس: {sentiment}\n")
